@@ -3,7 +3,7 @@ pipeline {
   stages {
 	stage('Test') {
       steps {
-		library identifier: 'current', retriever: legacySCM(scm)
+		library identifier: 'current@version', retriever: legacySCM(scm)
       }
 
 	}
