@@ -105,7 +105,7 @@ def main(params) {
   checkout scm;
 
   if (!fileExists('.openshiftio/application.yaml')) {
-    if (params.get('application_remote_file')) {
+    if (params.get('application_remote_file', '')) {
       sh "mkdir -p .openshiftio && curl -o .openshiftio/application.yaml ${application_remote_file}"
     } else {
       println("File not found: .openshiftio/application.yaml")
