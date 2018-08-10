@@ -5,8 +5,10 @@ pipeline {
     stage('Test') {
       steps {
         library identifier: 'current@version', retriever: legacySCM(scm)
-        osio {
-          application_remote_file = TEST_YAML
+        script {
+          osio {
+            application_remote_file = TEST_YAML
+          }
         }
       }
     }
