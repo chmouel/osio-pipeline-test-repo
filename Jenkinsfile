@@ -6,6 +6,7 @@ pipeline {
       steps {
         library identifier: 'current@version', retriever: legacySCM(scm)
         script {
+          sh "mkdir -p .openshiftio && curl -o .openshiftio/application.yaml ${TEST_YAML}"
           osio {
             stages = ['run', 'stage']
           }
