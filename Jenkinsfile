@@ -7,7 +7,7 @@ pipeline {
         library identifier: 'current@version', retriever: legacySCM(scm)
         script {
           osio {
-            application_remote_file = TEST_YAML
+            stages = ['run', 'stage']
           }
         }
       }
