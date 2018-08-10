@@ -4,8 +4,8 @@ pipeline {
 	stage('Test') {
       steps {
 		library identifier: 'current@version', retriever: legacySCM(scm)
+        osio { }
       }
-
 	}
   }
 }
