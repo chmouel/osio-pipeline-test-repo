@@ -1,6 +1,10 @@
-@Library('github.com/chmouel/osio-pipeline@wip')
-def STAGES = ['run', 'stage']
-
-osio {
-  stages = STAGES
+pipeline {
+	agent any
+	stages {
+		stage('Test') {
+			echo "hello ${env.TEST}"
+		}
+	}
 }
+
+// vim: ft=groovy
