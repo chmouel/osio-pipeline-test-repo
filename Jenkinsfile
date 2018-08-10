@@ -1,3 +1,4 @@
+def TEST_YAML = "https://raw.githubusercontent.com/chmouel/nodejs-health-check/master/.openshiftio/application.yaml"
 pipeline {
   agent any
   stages {
@@ -5,7 +6,7 @@ pipeline {
       steps {
         library identifier: 'current@version', retriever: legacySCM(scm)
         osio {
-
+          application_remote_file = TEST_YAML
         }
       }
     }
