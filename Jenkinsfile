@@ -3,7 +3,7 @@ pipeline {
   stages {
 	stage('Test') {
       steps {
-		echo "hello ${env.TEST}"
+		library identifier: 'current', retriever: legacySCM(scm)
       }
 
 	}
