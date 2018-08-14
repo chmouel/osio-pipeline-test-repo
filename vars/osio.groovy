@@ -130,7 +130,14 @@ def main(params) {
   templateBC = getNameFromTemplate(json, "BuildConfig")
   templateISDest = getNameFromTemplate(json, "ImageStream")
   templateRoute = getNameFromTemplate(json, "Route")
-  commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
+
+  // If we are using a different repository then use master as commitid,
+  // do we need to have it configurable?
+  if (params.repository) {
+    commitID = "master"
+  } else {
+    commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).toString().trim()
+  }
 
   stages = params.get('stages', ["run", "stage"])
   stage('Processing Template') {
