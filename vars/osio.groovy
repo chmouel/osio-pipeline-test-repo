@@ -117,7 +117,12 @@ def main(params) {
 
 
   currentUser = getCurrentUser()
-  currentGitRepo = getCurrentRepo()
+
+  if (params.repository) {
+    currentGitRepo = params.repository
+  } else {
+    currentGitRepo = getCurrentRepo()
+  }
 
   json = getJsonFromProcessedTemplate(params, currentGitRepo)
   templateDC = getNameFromTemplate(json, "DeploymentConfig")

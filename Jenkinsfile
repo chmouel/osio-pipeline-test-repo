@@ -1,4 +1,5 @@
-def TEST_YAML = "https://raw.githubusercontent.com/chmouel/nodejs-health-check/master/.openshiftio/application.yaml"
+def REPO = "https://github.com/chmouel/nodejs-health-check"
+
 pipeline {
   agent any
   stages {
@@ -8,7 +9,8 @@ pipeline {
         script {
           osio {
             stages = ['run']
-            application_remote_file = TEST_YAML
+            repository = REPO
+            application_remote_file = REPO.replace("https://github.com", "https://raw.githubusercontent.com") + "/master/.openshiftio/application.yaml"
             branch_name = "testing"
           }
         }
