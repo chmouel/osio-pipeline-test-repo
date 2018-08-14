@@ -106,7 +106,7 @@ def main(params) {
 
   if (!fileExists('.openshiftio/application.yaml')) {
     if (params.get('application_remote_file')) {
-      sh "mkdir -p .openshiftio && curl -o .openshiftio/application.yaml " + params.get('application_remote_file')
+      sh "mkdir -p .openshiftio && curl -o .openshiftio/application.yaml ${params.get('application_remote_file')}"
     } else {
       println("File not found: .openshiftio/application.yaml")
       currentBuild.result = 'FAILURE'
@@ -182,7 +182,15 @@ def call(body) {
   body()
 
 
-  pipelineParams["suffix"] = "-osio-${env.BRANCH_NAME}".toLowerCase()
+  if (env.BRANCH_NAME) {
+    pipelineParams["suffix"] = "-osio-${env.BRANCH_NAME}".toLowerCase()
+  } else if (pipelineParams.branch_name) {
+    pipelineParams["suffix"] = "-osio-${pipelineParams.branch_name}".toLowerCase()
+  } else {
+    println("Cannot detect branch name")
+    currentBuild.result = 'FAILURE'
+    return
+  }
 
   try {
     timeout(time: jobTimeOutHour, unit: 'HOURS') {

@@ -9,6 +9,7 @@ pipeline {
           osio {
             stages = ['run']
             application_remote_file = TEST_YAML
+            branch_name = "testing"
           }
         }
       }
